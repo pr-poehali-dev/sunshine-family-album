@@ -1,221 +1,163 @@
-import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import Icon from "@/components/ui/icon";
 
 const news = [
-  { date: "01.04", emoji: "📷", text: "Начали собирать семейные фотографии" },
-  { date: "02.04", emoji: "🎨", text: "Рисовали рисунки «Мой папа в детстве»" },
-  { date: "03.04", emoji: "📖", text: "Оформляли страницы альбома" },
-  { date: "04.04", emoji: "💻", text: "Видеоконференция с бабушкой" },
-  { date: "05.04", emoji: "🎬", text: "Мастер-класс по созданию видеопоздравления" },
-  { date: "06.04", emoji: "🌟", text: "Презентация альбома" },
+  { date: "01.04", text: "Начали собирать семейные фотографии" },
+  { date: "02.04", text: "Рисовали рисунки «Мой папа в детстве»" },
+  { date: "03.04", text: "Оформляли страницы альбома" },
+  { date: "04.04", text: "Видеоконференция с бабушкой" },
+  { date: "05.04", text: "Мастер-класс по созданию видеопоздравления" },
+  { date: "06.04", text: "Презентация семейного альбома" },
 ];
 
 const teachers = [
   {
     name: "Литвинова Екатерина Андреевна",
     role: "Воспитатель высшей категории",
-    emoji: "👩‍🏫",
     phone: "+7 (999) 123-45-67",
-    color: "border-purple-200",
-    bg: "bg-purple-50",
-    badge: "bg-purple-100 text-purple-700",
+    avatar: "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/27ffda4a-11e7-4be4-8ca9-26d303ccdf7e.jpg",
   },
   {
     name: "Горбачёва Алёна Александровна",
     role: "Воспитатель",
-    emoji: "👩‍🏫",
     phone: "+7 (999) 123-45-67",
-    color: "border-blue-200",
-    bg: "bg-blue-50",
-    badge: "bg-blue-100 text-blue-700",
+    avatar: "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/c5fd8a15-ea50-480f-b875-0e23930e6010.jpg",
   },
   {
     name: "Смирнова Ольга Дмитриевна",
     role: "Младший воспитатель",
-    emoji: "👩‍💼",
     phone: "+7 (999) 123-45-67",
-    color: "border-indigo-200",
-    bg: "bg-indigo-50",
-    badge: "bg-indigo-100 text-indigo-700",
-  },
-];
-
-const quickLinks = [
-  {
-    path: "/project",
-    label: "Проектная деятельность",
-    desc: "Паспорт проекта, этапы, мониторинг и мероприятия",
-    emoji: "📚",
-    color: "from-violet-100 to-purple-100 border-violet-200",
-    textColor: "text-violet-700",
-  },
-  {
-    path: "/gallery",
-    label: "Галерея",
-    desc: "Рисунки детей и фотографии готового альбома",
-    emoji: "🖼️",
-    color: "from-blue-100 to-sky-100 border-blue-200",
-    textColor: "text-blue-700",
-  },
-  {
-    path: "/parents",
-    label: "Родителям",
-    desc: "Задачи, дорожная карта, презентация и видеоролики",
-    emoji: "💌",
-    color: "from-indigo-100 to-violet-100 border-indigo-200",
-    textColor: "text-indigo-700",
+    avatar: "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/ffbbc12b-e668-4af3-ba2e-b7c115707d67.jpg",
   },
 ];
 
 export default function Index() {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 left-0 w-72 h-72 bg-purple-200/40 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-200/40 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
+      {/* === WELCOME === */}
+      <section
+        className="relative py-12 md:py-20 px-4"
+        style={{
+          backgroundImage: `
+            radial-gradient(ellipse 60px 90px at 3% 30%, rgba(255,130,130,0.35) 0%, transparent 70%),
+            radial-gradient(ellipse 50px 80px at 5% 65%, rgba(255,170,80,0.35) 0%, transparent 70%),
+            radial-gradient(ellipse 45px 70px at 95% 25%, rgba(100,190,100,0.3) 0%, transparent 70%),
+            radial-gradient(ellipse 55px 85px at 97% 60%, rgba(100,190,100,0.25) 0%, transparent 70%)
+          `,
+        }}
+      >
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="font-caveat font-bold text-5xl md:text-6xl mb-6" style={{ color: "#2d7d2d" }}>
+            Старшая группа «Солнышко»
+          </h1>
+          <div className="space-y-2">
+            <p className="welcome-text">Уважаемые гости,</p>
+            <p className="welcome-text">мы рады приветствовать вас на нашем сайте!</p>
+          </div>
         </div>
+      </section>
 
-        <div className="container mx-auto px-4 py-10 md:py-16">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="animate-slide-up stagger-1">
-              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
-                <span>☀️</span>
-                <span>Старшая группа «Солнышко»</span>
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-4">
-                Проект<br />
-                <span className="font-caveat text-5xl md:text-6xl text-primary">«Семейный альбом»</span>
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Уважаемые гости, мы рады приветствовать вас на нашем сайте!
-                Здесь вы найдёте всё о нашем творческом проекте.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link to="/project" className="btn-primary inline-flex items-center gap-2">
-                  <Icon name="BookOpen" size={18} />
-                  О проекте
-                </Link>
-                <Link
-                  to="/gallery"
-                  className="inline-flex items-center gap-2 border border-primary text-primary rounded-2xl px-6 py-3 font-semibold transition-all hover:bg-primary/10"
+      {/* === NEWS === */}
+      <section
+        className="py-10 px-4 relative"
+        style={{
+          backgroundImage: `
+            radial-gradient(ellipse 50px 80px at 2% 40%, rgba(255,130,130,0.3) 0%, transparent 70%),
+            radial-gradient(ellipse 45px 70px at 4% 75%, rgba(255,170,80,0.3) 0%, transparent 70%),
+            radial-gradient(ellipse 40px 65px at 96% 30%, rgba(100,190,100,0.25) 0%, transparent 70%),
+            radial-gradient(ellipse 50px 75px at 98% 70%, rgba(100,190,100,0.2) 0%, transparent 70%)
+          `,
+        }}
+      >
+        <div className="max-w-5xl mx-auto">
+          <h2 className="section-heading mb-8">Новостная лента</h2>
+          <div
+            className="rounded-2xl overflow-hidden"
+            style={{ background: "#4a9e4a" }}
+          >
+            <div className="grid grid-cols-2 md:grid-cols-3 divide-x divide-y divide-green-400/40">
+              {news.map((item, i) => (
+                <div
+                  key={i}
+                  className="p-5 flex flex-col justify-between min-h-[130px]"
+                  style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.06)" }}
                 >
-                  <Icon name="Image" size={18} />
-                  Галерея
-                </Link>
-              </div>
-            </div>
-
-            <div className="animate-slide-up stagger-2">
-              <div className="relative">
-                <img
-                  src="https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/27ffda4a-11e7-4be4-8ca9-26d303ccdf7e.jpg"
-                  alt="Дети с семейным альбомом"
-                  className="w-full rounded-3xl shadow-xl object-cover aspect-[4/3]"
-                />
-                <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg p-3 border border-border">
-                  <p className="font-caveat text-2xl text-primary">Наша группа ☀️</p>
-                  <p className="text-xs text-muted-foreground">апрель 2024</p>
+                  <p className="text-white font-medium text-sm leading-snug">{item.text}</p>
+                  <p className="news-date">{item.date}.2024</p>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Quick links */}
-      <section className="container mx-auto px-4 py-10">
-        <h2 className="section-title text-center">Разделы сайта</h2>
-        <div className="grid md:grid-cols-3 gap-4">
-          {quickLinks.map((link, i) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`block bg-gradient-to-br ${link.color} border rounded-3xl p-6 hover:shadow-lg transition-all hover:-translate-y-1 group`}
-            >
-              <div className="text-4xl mb-3">{link.emoji}</div>
-              <h3 className={`font-bold text-lg ${link.textColor} mb-2`}>{link.label}</h3>
-              <p className="text-sm text-foreground/60 leading-relaxed">{link.desc}</p>
-              <div className={`mt-4 inline-flex items-center gap-1 text-sm font-medium ${link.textColor}`}>
-                Перейти <Icon name="ArrowRight" size={16} />
+      {/* === TEACHERS === */}
+      <section
+        className="py-12 px-4 relative"
+        style={{
+          background: "#f5ead8",
+          backgroundImage: `
+            radial-gradient(ellipse 55px 85px at 2% 40%, rgba(255,130,130,0.25) 0%, transparent 70%),
+            radial-gradient(ellipse 45px 70px at 4% 75%, rgba(255,170,80,0.25) 0%, transparent 70%),
+            radial-gradient(ellipse 40px 60px at 96% 35%, rgba(100,190,100,0.2) 0%, transparent 70%)
+          `,
+        }}
+      >
+        <div className="max-w-4xl mx-auto">
+          <h2 className="section-heading mb-2">О ваших детях заботятся</h2>
+          <div className="w-8 h-1 bg-gray-400 rounded mx-auto mb-10" />
+          <div className="grid md:grid-cols-3 gap-8">
+            {teachers.map((t, i) => (
+              <div key={i} className="flex flex-col items-center text-center">
+                {/* Round photo */}
+                <div
+                  className="w-36 h-36 rounded-full overflow-hidden mb-4 border-4 border-white shadow-md"
+                  style={{ filter: "grayscale(80%)" }}
+                >
+                  <img src={t.avatar} alt={t.name} className="w-full h-full object-cover" />
+                </div>
+                <p className="text-sm text-gray-700 font-medium leading-snug mb-3 max-w-[200px]">
+                  <span className="text-gray-500">{t.role}:</span>{" "}
+                  <span className="font-semibold">{t.name}</span>
+                </p>
+                <a
+                  href={`tel:${t.phone}`}
+                  className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-green-700 transition-colors"
+                >
+                  <Icon name="Phone" size={14} />
+                  {t.phone}
+                </a>
               </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* News */}
-      <section className="container mx-auto px-4 py-10">
-        <h2 className="section-title flex items-center gap-2">
-          <Icon name="Newspaper" size={28} className="text-primary" />
-          Новостная лента
-        </h2>
-        <div className="grid gap-3">
-          {news.map((item, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-4 card-pastel p-4 hover:shadow-md transition-all"
-            >
-              <div className="flex-shrink-0 w-16 h-16 bg-primary/10 rounded-2xl flex flex-col items-center justify-center">
-                <span className="text-2xl">{item.emoji}</span>
-                <span className="text-xs font-bold text-primary">{item.date}</span>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">апрель 2024</p>
-                <p className="font-medium text-foreground">{item.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Teachers */}
-      <section className="container mx-auto px-4 py-10">
-        <h2 className="section-title flex items-center gap-2">
-          <Icon name="Heart" size={28} className="text-primary" />
-          О ваших детях заботятся
-        </h2>
-        <div className="grid md:grid-cols-3 gap-4">
-          {teachers.map((t, i) => (
-            <div
-              key={i}
-              className={`card-pastel p-6 border ${t.color} ${t.bg} hover:shadow-md transition-all`}
-            >
-              <div className="text-5xl mb-3">{t.emoji}</div>
-              <span className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3 ${t.badge}`}>
-                {t.role}
-              </span>
-              <h3 className="font-bold text-foreground text-base mb-3">{t.name}</h3>
-              <a
-                href={`tel:${t.phone}`}
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Icon name="Phone" size={14} />
-                {t.phone}
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Album image */}
-      <section className="container mx-auto px-4 py-10">
-        <div className="relative rounded-3xl overflow-hidden">
-          <img
-            src="https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/ffbbc12b-e668-4af3-ba2e-b7c115707d67.jpg"
-            alt="Семейный альбом"
-            className="w-full object-cover max-h-80 rounded-3xl"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-transparent flex items-center">
-            <div className="p-8 text-white max-w-md">
-              <p className="font-caveat text-4xl mb-2">Наш семейный альбом</p>
-              <p className="text-white/90 text-sm">
-                Совместный труд детей, педагогов и родителей — страница за страницей.
-              </p>
-            </div>
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* === PROJECT BUTTON === */}
+      <section
+        className="py-12 px-4 relative"
+        style={{
+          backgroundImage: `
+            radial-gradient(ellipse 50px 80px at 2% 50%, rgba(255,130,130,0.3) 0%, transparent 70%),
+            radial-gradient(ellipse 45px 70px at 97% 50%, rgba(100,190,100,0.25) 0%, transparent 70%)
+          `,
+        }}
+      >
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="font-caveat text-4xl font-bold mb-4" style={{ color: "#d97706" }}>
+            В данном проекте необходимо Ваше участие в совместной деятельности с детьми и сотрудниками ДОУ
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Узнайте подробнее о задачах, этапах и мероприятиях проекта «Семейный альбом»
+          </p>
+          <a
+            href="/project"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
+            style={{ background: "#2d7d2d" }}
+          >
+            <Icon name="BookOpen" size={18} />
+            Проектная деятельность
+          </a>
         </div>
       </section>
     </Layout>

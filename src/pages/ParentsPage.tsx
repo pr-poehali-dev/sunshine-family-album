@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Layout from "@/components/Layout";
 import Icon from "@/components/ui/icon";
 
@@ -71,7 +72,14 @@ const videos = [
 ];
 
 export default function ParentsPage() {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("tasks");
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get("tab");
+    if (tab) setActiveTab(tab);
+  }, [location.search]);
 
   const tabs = [
     { id: "tasks", label: "Задачи", icon: "ListChecks" },
