@@ -11,24 +11,29 @@ const parentsSub = [
   { path: "/parents?tab=videos", label: "Задание по проекту" },
 ];
 
+const colleaguesSub = [
+  { path: "/colleagues?tab=tasks", label: "Задачи по проекту" },
+  { path: "/colleagues?tab=experience", label: "Обобщение педагогического опыта" },
+];
+
 const navItems = [
   { path: "/", label: "ГЛАВНАЯ" },
   { path: "/parents", label: "РОДИТЕЛЯМ", sub: parentsSub },
-  { path: "/colleagues", label: "КОЛЛЕГАМ ДОУ" },
+  { path: "/colleagues", label: "КОЛЛЕГАМ ДОУ", sub: colleaguesSub },
   { path: "/gallery", label: "ГАЛЕРЕЯ" },
   { path: "/achievements", label: "НАШИ ДОСТИЖЕНИЯ" },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [parentsOpen, setParentsOpen] = useState(false);
-  const parentsRef = useRef<HTMLDivElement>(null);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (parentsRef.current && !parentsRef.current.contains(e.target as Node)) {
-        setParentsOpen(false);
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenMenu(null);
       }
     }
     document.addEventListener("mousedown", handleClick);
@@ -54,24 +59,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {/* Handprint decorations */}
         <div className="relative">
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center justify-center gap-2 px-4 py-3 flex-wrap">
+          <div ref={navRef} className="hidden md:flex items-center justify-center gap-2 px-4 py-3 flex-wrap">
             {navItems.map((item) =>
               item.sub ? (
-                <div key={item.path} ref={parentsRef} className="relative">
+                <div key={item.path} className="relative">
                   <button
-                    onClick={() => setParentsOpen(!parentsOpen)}
+                    onClick={() => setOpenMenu(openMenu === item.path ? null : item.path)}
                     className={`nav-pill flex items-center gap-1 ${isActive(item.path) ? "nav-pill-active" : ""}`}
                   >
                     {item.label}
-                    <Icon name="ChevronDown" size={14} className={`transition-transform ${parentsOpen ? "rotate-180" : ""}`} />
+                    <Icon name="ChevronDown" size={14} className={`transition-transform ${openMenu === item.path ? "rotate-180" : ""}`} />
                   </button>
-                  {parentsOpen && (
-                    <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 min-w-[220px] overflow-hidden animate-fade-in">
+                  {openMenu === item.path && (
+                    <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 min-w-[260px] overflow-hidden animate-fade-in">
                       {item.sub.map((s) => (
                         <Link
                           key={s.path}
                           to={s.path}
-                          onClick={() => setParentsOpen(false)}
+                          onClick={() => setOpenMenu(null)}
                           className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-yellow-50 hover:text-green-700 font-medium border-b border-gray-100 last:border-0"
                         >
                           {s.label}

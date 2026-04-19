@@ -123,6 +123,21 @@ const finalStage = {
 
 const PRESENTATION_URL = "/files/Семейный_альбом_презентация.pptx";
 
+const articleLinks = [
+  {
+    label: "Как создать семейный альбом вместе с ребёнком — методические рекомендации",
+    url: "https://www.youtube.com/results?search_query=семейный+альбом+дети+методика",
+  },
+  {
+    label: "Мастер-класс по созданию видеопоздравления для папы",
+    url: "https://www.youtube.com/results?search_query=видеопоздравление+папа+дети+мастер+класс",
+  },
+  {
+    label: "Проектная деятельность в детском саду: семейные ценности",
+    url: "https://www.youtube.com/results?search_query=проектная+деятельность+детский+сад+семья",
+  },
+];
+
 const videos = [
   {
     title: "Как сделать видеопоздравление для папы",
@@ -322,11 +337,32 @@ export default function ParentsPage() {
           {/* === VIDEOS === */}
           {activeTab === "videos" && (
             <div className="animate-fade-in">
-              <h2 className="font-caveat font-bold text-4xl mb-4" style={{ color: "#2d7d2d" }}>
-                Задания по проекту
-              </h2>
-              <p className="text-gray-600 mb-8">
-                Обучающие видеоролики для выполнения заданий совместно с ребёнком:
+              <h1 className="font-caveat font-bold text-4xl md:text-5xl text-center mb-10 leading-tight" style={{ color: "#d97706" }}>
+                Принятие участия в мастер-классе по созданию видеопоздравления для папы
+              </h1>
+
+              {/* Статьи — жёлтые полоски */}
+              <p className="text-lg text-gray-700 mb-4">
+                Перейдя по ссылкам ниже вы сможете ознакомиться с подробной информацией по созданию видеофильмов:
+              </p>
+              <div className="flex flex-col gap-3 mb-10">
+                {articleLinks.map((link, i) => (
+                  <a
+                    key={i}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center px-6 py-3 rounded-xl font-medium text-gray-800 transition-all hover:brightness-95 hover:shadow-sm truncate"
+                    style={{ background: "#fde68a" }}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+
+              {/* Видеоролики */}
+              <p className="text-lg text-gray-700 mb-4">
+                Перейдя по ссылкам ниже вы сможете попасть на обучающие видеоролики по созданию видеофильмов:
               </p>
               <div className="grid gap-4">
                 {videos.map((video, i) => (
@@ -337,16 +373,11 @@ export default function ParentsPage() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-4 bg-white border border-gray-200 rounded-2xl p-5 hover:shadow-md hover:border-yellow-300 transition-all group"
                   >
-                    <div
-                      className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: "#fee2e2" }}
-                    >
+                    <div className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "#fee2e2" }}>
                       <span className="text-2xl">▶️</span>
                     </div>
                     <div className="flex-1">
-                      <p className="font-semibold text-gray-800 group-hover:text-green-700 transition-colors">
-                        {video.title}
-                      </p>
+                      <p className="font-semibold text-gray-800 group-hover:text-green-700 transition-colors">{video.title}</p>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-xs bg-red-100 text-red-600 font-semibold px-2 py-0.5 rounded-full">YouTube</span>
                         <span className="text-xs text-gray-400">{video.duration}</span>

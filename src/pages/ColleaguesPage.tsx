@@ -1,147 +1,176 @@
+import { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Layout from "@/components/Layout";
 import Icon from "@/components/ui/icon";
 
-const tasks = [
-  { emoji: "📋", text: "Изучение паспорта проекта и его реализация в своей группе" },
-  { emoji: "🤝", text: "Взаимодействие с коллегами по вопросам проекта" },
-  { emoji: "📊", text: "Проведение педагогической диагностики по когнитивной, аффективной и психомоторной областям" },
-  { emoji: "🎨", text: "Организация творческих занятий и мастер-классов" },
-  { emoji: "👨‍👩‍👧", text: "Привлечение родителей к участию в проекте" },
-  { emoji: "📖", text: "Ведение документации: планы, отчёты, фотоотчёты" },
+const colleguesTasks = [
+  "Подготовить и провести родительское собрание",
+  "Создать презентацию на родительское собрание",
+  "Создать чат для родителей",
+  "Провести мониторинг детей",
+  "Утвердить план проекта с сотрудниками ДОУ",
+  "Разработать дидактические материалы",
+  "Разработать сайт группы",
+  "Организовать интервьюирование детей",
+  "Подготовить и провести мастер-класс по созданию видеопоздравления",
+  "Организовать и подготовить презентацию семейного альбома",
+  "Принять участие в мероприятиях по обобщению педагогического опыта",
+  "Оформить галерею детских рисунков «Мой папа в детстве»",
+  "Организовать видеоконференцию «Рассказ бабушки о папе»",
+  "Провести повторный мониторинг и сравнить результаты",
 ];
 
 const experience = [
   {
     title: "Актуальность обобщения опыта",
     icon: "Lightbulb",
-    color: "bg-violet-50 border-violet-200",
-    iconColor: "text-violet-500",
     text: "Проект «Семейный альбом» демонстрирует эффективную модель интеграции образовательных областей: художественно-эстетического, социально-коммуникативного и познавательного развития. Совместная деятельность детей, педагогов и родителей является ключевым фактором успеха.",
   },
   {
     title: "Педагогическая ценность",
     icon: "Star",
-    color: "bg-blue-50 border-blue-200",
-    iconColor: "text-blue-500",
     text: "Проект формирует у детей представления о семейных ценностях, укрепляет детско-родительские отношения, развивает творческие способности и навыки работы в команде. Использование ИКТ (видеоконференции, создание видеопоздравлений) делает проект современным и актуальным.",
   },
   {
     title: "Методические рекомендации",
     icon: "BookOpen",
-    color: "bg-indigo-50 border-indigo-200",
-    iconColor: "text-indigo-500",
     text: "Для успешной реализации проекта рекомендуется: заблаговременное информирование родителей; поэтапное включение детей в деятельность; документирование каждого этапа; гибкий подход к планированию с учётом интересов детей.",
   },
   {
     title: "Результаты и перспективы",
     icon: "TrendingUp",
-    color: "bg-purple-50 border-purple-200",
-    iconColor: "text-purple-500",
     text: "По итогам проекта значительно улучшились показатели во всех трёх областях мониторинга. Проект получил высокую оценку родителей и рекомендован к тиражированию в других группах ДОУ. Планируется создание цикла проектов о семейных традициях.",
   },
 ];
 
-const materials = [
-  { icon: "FileText", label: "Паспорт проекта (PDF)", size: "245 КБ" },
-  { icon: "BarChart2", label: "Карты мониторинга", size: "180 КБ" },
-  { icon: "Calendar", label: "Дорожная карта проекта", size: "120 КБ" },
-  { icon: "Presentation", label: "Презентация опыта работы", size: "3.2 МБ" },
-];
-
 export default function ColleaguesPage() {
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState("tasks");
+  const dropRef = useRef<HTMLDivElement>(null);
+  const [dropOpen, setDropOpen] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get("tab");
+    if (tab) setActiveTab(tab);
+  }, [location.search]);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (dropRef.current && !dropRef.current.contains(e.target as Node)) {
+        setDropOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const tabs = [
+    { id: "tasks", label: "ЗАДАЧИ ПО ПРОЕКТУ" },
+    { id: "experience", label: "ОБОБЩЕНИЕ ПЕДАГОГИЧЕСКОГО ОПЫТА" },
+  ];
+
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-10">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
-            <Icon name="Users" size={16} />
-            <span>Коллегам ДОУ</span>
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            Педагогический опыт
-          </h1>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Материалы для коллег по реализации проекта «Семейный альбом»
-          </p>
-        </div>
+      <div
+        className="min-h-screen"
+        style={{
+          backgroundImage: `
+            radial-gradient(ellipse 55px 85px at 2% 30%, rgba(255,130,130,0.28) 0%, transparent 70%),
+            radial-gradient(ellipse 45px 70px at 3% 65%, rgba(255,170,80,0.28) 0%, transparent 70%),
+            radial-gradient(ellipse 40px 60px at 97% 25%, rgba(100,190,100,0.2) 0%, transparent 70%),
+            radial-gradient(ellipse 50px 75px at 98% 65%, rgba(100,190,100,0.16) 0%, transparent 70%)
+          `,
+        }}
+      >
+        <div className="max-w-5xl mx-auto px-4 py-10">
 
-        {/* Tasks for colleagues */}
-        <section className="mb-12">
-          <h2 className="section-title flex items-center gap-2">
-            <Icon name="ListChecks" size={26} className="text-primary" />
-            Задачи педагогов по проекту
-          </h2>
-          <div className="grid md:grid-cols-2 gap-3">
-            {tasks.map((task, i) => (
-              <div key={i} className="card-pastel p-5 flex items-start gap-4 hover:shadow-md transition-all">
-                <span className="text-3xl">{task.emoji}</span>
-                <p className="text-foreground leading-relaxed">{task.text}</p>
-              </div>
+          {/* Sub-tabs */}
+          <div className="flex flex-wrap gap-2 mb-10">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all ${
+                  activeTab === tab.id
+                    ? "bg-yellow-400 border-yellow-400 text-gray-900"
+                    : "bg-white border-gray-300 text-gray-700 hover:bg-yellow-50"
+                }`}
+              >
+                {tab.label}
+              </button>
             ))}
           </div>
-        </section>
 
-        {/* Experience */}
-        <section className="mb-12">
-          <h2 className="section-title flex items-center gap-2">
-            <Icon name="GraduationCap" size={26} className="text-primary" />
-            Обобщение педагогического опыта
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {experience.map((item, i) => (
-              <div key={i} className={`rounded-3xl border p-6 ${item.color}`}>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center shadow-sm">
-                    <Icon name={item.icon} size={20} className={item.iconColor} fallback="Circle" />
+          {/* === TASKS === */}
+          {activeTab === "tasks" && (
+            <div className="animate-fade-in">
+              <h1 className="font-caveat font-bold text-4xl md:text-5xl text-center mb-10 leading-tight" style={{ color: "#2d7d2d" }}>
+                В данном проекте необходимо Ваше участие в совместной деятельности с детьми для полной реализации проекта «Семейный альбом»
+              </h1>
+              <div className="grid md:grid-cols-2 gap-8 items-start">
+                {/* Картинка слева */}
+                <div className="flex items-start justify-center">
+                  <img
+                    src="https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/27ffda4a-11e7-4be4-8ca9-26d303ccdf7e.jpg"
+                    alt="Совместная деятельность"
+                    className="rounded-2xl shadow-md w-full max-w-sm object-cover"
+                    style={{ aspectRatio: "1/1" }}
+                  />
+                </div>
+                {/* Нумерованный список справа */}
+                <ol className="space-y-2.5">
+                  {colleguesTasks.map((task, i) => (
+                    <li key={i} className="flex items-start gap-3 text-gray-700 leading-snug">
+                      <span className="flex-shrink-0 text-gray-500 font-medium text-sm w-6 pt-0.5">
+                        {i + 1}.
+                      </span>
+                      <span>{task}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          )}
+
+          {/* === EXPERIENCE === */}
+          {activeTab === "experience" && (
+            <div className="animate-fade-in">
+              <h1 className="font-caveat font-bold text-4xl md:text-5xl text-center mb-10 leading-tight" style={{ color: "#2d7d2d" }}>
+                Обобщение педагогического опыта
+              </h1>
+              <div className="grid md:grid-cols-2 gap-6">
+                {experience.map((item, i) => (
+                  <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition-all">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div
+                        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                        style={{ background: "#f0fdf4" }}
+                      >
+                        <Icon name={item.icon} size={20} className="text-green-600" fallback="Circle" />
+                      </div>
+                      <h3 className="font-bold text-gray-800">{item.title}</h3>
+                    </div>
+                    <p className="text-sm text-gray-600 leading-relaxed">{item.text}</p>
                   </div>
-                  <h3 className="font-bold text-foreground">{item.title}</h3>
-                </div>
-                <p className="text-sm text-foreground/70 leading-relaxed">{item.text}</p>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* Materials */}
-        <section className="mb-12">
-          <h2 className="section-title flex items-center gap-2">
-            <Icon name="FolderOpen" size={26} className="text-primary" />
-            Методические материалы
-          </h2>
-          <div className="grid md:grid-cols-2 gap-3">
-            {materials.map((mat, i) => (
-              <div key={i} className="card-pastel p-5 flex items-center gap-4 hover:shadow-md transition-all group cursor-pointer">
-                <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <Icon name={mat.icon} size={22} className="text-primary" fallback="File" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-semibold text-foreground">{mat.label}</p>
-                  <p className="text-xs text-muted-foreground">{mat.size}</p>
-                </div>
-                <Icon name="Download" size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+              {/* Контакт */}
+              <div className="mt-10 text-center">
+                <p className="text-gray-600 mb-4">Для обмена педагогическим опытом свяжитесь с нами:</p>
+                <a
+                  href="tel:+79991234567"
+                  className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-white transition-all hover:scale-105"
+                  style={{ background: "#2d7d2d" }}
+                >
+                  <Icon name="Phone" size={18} />
+                  +7 (999) 123-45-67
+                </a>
               </div>
-            ))}
-          </div>
-          <p className="text-xs text-muted-foreground text-center mt-3">
-            Материалы будут доступны для скачивания после завершения проекта
-          </p>
-        </section>
+            </div>
+          )}
 
-        {/* Contact */}
-        <div className="card-pastel p-6 text-center border-2 border-primary/20">
-          <Icon name="MessageCircle" size={32} className="text-primary mx-auto mb-3" />
-          <h3 className="font-bold text-xl text-foreground mb-2">Есть вопросы?</h3>
-          <p className="text-muted-foreground mb-4">
-            Свяжитесь с нами для обмена педагогическим опытом
-          </p>
-          <a
-            href="tel:+79991234567"
-            className="btn-primary inline-flex items-center gap-2"
-          >
-            <Icon name="Phone" size={18} />
-            +7 (999) 123-45-67
-          </a>
         </div>
       </div>
     </Layout>
