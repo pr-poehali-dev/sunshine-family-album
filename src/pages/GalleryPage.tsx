@@ -28,6 +28,30 @@ const albumPhotos = [
   { title: "Страница 4", desc: "Наши воспоминания", emoji: "💝" },
 ];
 
+const drawingCaptions = [
+  "Мой папа в детстве",
+  "Папа играет во дворе",
+  "Папа и бабушка",
+  "Папина любимая игрушка",
+  "День рождения папы",
+  "Папа на рыбалке с дедушкой",
+  "Наша семья",
+  "Мамины воспоминания",
+  "Дедушка в молодости",
+  "Семейный праздник",
+  "Любимое занятие папы",
+  "Папин дом детства",
+];
+
+const albumCaptions = [
+  "Страница «Семья и традиции»",
+  "Страница «Папа в детстве»",
+  "Страница «Бабушкины рассказы»",
+  "Страница «Наши воспоминания»",
+  "Страница «Дорогие моменты»",
+  "Страница «История семьи»",
+];
+
 const PRESET_DRAWINGS: GalleryItem[] = [
   {
     url: "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/bac7e147-6ece-49c5-82c2-2d63d59fbbd1.jpg",
@@ -217,7 +241,9 @@ export default function GalleryPage() {
                 </div>
                 <div className="p-3 text-center">
                   <p className="text-xs text-muted-foreground">
-                    {activeTab === "drawings" ? "Мой папа в детстве" : "Страница альбома"}
+                    {activeTab === "drawings"
+                      ? drawingCaptions[i % drawingCaptions.length]
+                      : albumCaptions[i % albumCaptions.length]}
                   </p>
                 </div>
               </div>
