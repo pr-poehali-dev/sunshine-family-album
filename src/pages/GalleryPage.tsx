@@ -28,6 +28,33 @@ const albumPhotos = [
   { title: "Страница 4", desc: "Наши воспоминания", emoji: "💝" },
 ];
 
+const PRESET_DRAWINGS: GalleryItem[] = [
+  {
+    url: "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/bac7e147-6ece-49c5-82c2-2d63d59fbbd1.jpg",
+    key: "preset/drawing_1.jpg", category: "drawings", uploaded_at: "2024-04-02T09:00:00",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/8cd9b104-4eae-4f2c-9a35-262f737a2b73.jpg",
+    key: "preset/drawing_2.jpg", category: "drawings", uploaded_at: "2024-04-02T09:01:00",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/df170d0b-011c-4b46-be8c-4742546cc866.jpg",
+    key: "preset/drawing_3.jpg", category: "drawings", uploaded_at: "2024-04-02T09:02:00",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/45ec17af-0c75-4119-8065-0c27ee37645c.jpg",
+    key: "preset/drawing_4.jpg", category: "drawings", uploaded_at: "2024-04-02T09:03:00",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/2121ed06-56c2-4686-9944-2cd22d5885fc.jpg",
+    key: "preset/drawing_5.jpg", category: "drawings", uploaded_at: "2024-04-02T09:04:00",
+  },
+  {
+    url: "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/a1a70bf0-0f03-4661-92e0-b6e4fa5400fa.jpg",
+    key: "preset/drawing_6.jpg", category: "drawings", uploaded_at: "2024-04-02T09:05:00",
+  },
+];
+
 export default function GalleryPage() {
   const [activeTab, setActiveTab] = useState<"drawings" | "album">("drawings");
   const [items, setItems] = useState<GalleryItem[]>([]);
@@ -83,9 +110,12 @@ export default function GalleryPage() {
     await fetchGallery(activeTab);
   };
 
-  const drawingItems = items.filter((i) => i.category === "drawings");
+  const uploadedDrawings = items.filter((i) => i.category === "drawings");
+  const allDrawings = uploadedDrawings.length > 0
+    ? uploadedDrawings
+    : PRESET_DRAWINGS;
   const albumItems = items.filter((i) => i.category === "album");
-  const currentItems = activeTab === "drawings" ? drawingItems : albumItems;
+  const currentItems = activeTab === "drawings" ? allDrawings : albumItems;
 
   return (
     <Layout>
@@ -194,16 +224,16 @@ export default function GalleryPage() {
             ))}
           </div>
         ) : (
-          /* Placeholder when empty */
-          <div className="text-center py-16">
-            <div className="text-6xl mb-4">{activeTab === "drawings" ? "🎨" : "📖"}</div>
-            <p className="font-semibold text-foreground mb-1">
-              {activeTab === "drawings" ? "Рисунки ещё не загружены" : "Фото альбома ещё не добавлены"}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Нажмите на область выше, чтобы загрузить первые работы
-            </p>
-          </div>
+          /* Placeholder when empty — only for album tab */
+          activeTab === "album" ? (
+            <div className="text-center py-16">
+              <div className="text-6xl mb-4">📖</div>
+              <p className="font-semibold text-foreground mb-1">Фото альбома ещё не добавлены</p>
+              <p className="text-sm text-muted-foreground">
+                Нажмите на область выше, чтобы загрузить первые фото
+              </p>
+            </div>
+          ) : null
         )}
 
         {/* Static album preview (always shown in album tab when empty) */}
