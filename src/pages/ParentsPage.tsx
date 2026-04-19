@@ -47,10 +47,12 @@ const roadmap = [
   },
 ];
 
+const PRESENTATION_URL = "/files/Семейный_альбом_презентация.pptx";
+
 const videos = [
-  { title: "Как сделать видеопоздравление для папы", url: "#", duration: "5 мин" },
-  { title: "Создаём семейный альбом вместе с ребёнком", url: "#", duration: "8 мин" },
-  { title: "Рисуем портрет папы: мастер-класс", url: "#", duration: "12 мин" },
+  { title: "Как сделать видеопоздравление для папы", url: "https://www.youtube.com/", duration: "5 мин" },
+  { title: "Создаём семейный альбом вместе с ребёнком", url: "https://www.youtube.com/", duration: "8 мин" },
+  { title: "Рисуем портрет папы: мастер-класс", url: "https://www.youtube.com/", duration: "12 мин" },
 ];
 
 export default function ParentsPage() {
@@ -169,12 +171,16 @@ export default function ParentsPage() {
                 Полная презентация проекта с фотографиями, результатами и выводами.
                 Формат: PowerPoint / PDF
               </p>
-              <button className="btn-primary inline-flex items-center gap-2">
+              <a
+                href={PRESENTATION_URL}
+                download="Семейный_альбом_презентация.pptx"
+                className="btn-primary inline-flex items-center gap-2"
+              >
                 <Icon name="Download" size={18} />
                 Скачать презентацию
-              </button>
+              </a>
               <p className="text-xs text-muted-foreground mt-4">
-                Файл будет доступен после окончания проекта
+                Файл .pptx · Загружается автоматически
               </p>
             </div>
           </div>
@@ -194,9 +200,14 @@ export default function ParentsPage() {
                     <h3 className="font-semibold text-foreground">{video.title}</h3>
                     <p className="text-sm text-muted-foreground">{video.duration}</p>
                   </div>
-                  <button className="text-primary hover:text-primary/70 transition-colors">
+                  <a
+                    href={video.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/70 transition-colors"
+                  >
                     <Icon name="ExternalLink" size={18} />
-                  </button>
+                  </a>
                 </div>
               ))}
             </div>
