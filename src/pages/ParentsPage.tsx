@@ -50,9 +50,24 @@ const roadmap = [
 const PRESENTATION_URL = "/files/Семейный_альбом_презентация.pptx";
 
 const videos = [
-  { title: "Как сделать видеопоздравление для папы", url: "https://www.youtube.com/", duration: "5 мин" },
-  { title: "Создаём семейный альбом вместе с ребёнком", url: "https://www.youtube.com/", duration: "8 мин" },
-  { title: "Рисуем портрет папы: мастер-класс", url: "https://www.youtube.com/", duration: "12 мин" },
+  {
+    title: "Как сделать видеопоздравление для папы",
+    url: "https://www.youtube.com/results?search_query=видеопоздравление+для+папы+от+ребёнка",
+    duration: "≈ 5 мин",
+    ready: false,
+  },
+  {
+    title: "Создаём семейный альбом вместе с ребёнком",
+    url: "https://www.youtube.com/results?search_query=семейный+альбом+с+детьми+мастер+класс",
+    duration: "≈ 8 мин",
+    ready: false,
+  },
+  {
+    title: "Рисуем портрет папы: мастер-класс",
+    url: "https://www.youtube.com/results?search_query=рисуем+портрет+папы+дети+мастер+класс",
+    duration: "≈ 12 мин",
+    ready: false,
+  },
 ];
 
 export default function ParentsPage() {
@@ -190,25 +205,32 @@ export default function ParentsPage() {
         {activeTab === "videos" && (
           <div className="animate-fade-in">
             <h2 className="section-title">Обучающие видеоролики</h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              Ссылки ведут на подборку похожих видео на YouTube — воспитатель заменит их на конкретные ролики.
+            </p>
             <div className="grid gap-4">
               {videos.map((video, i) => (
-                <div key={i} className="card-pastel p-5 flex items-center gap-4 hover:shadow-md transition-all">
-                  <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <Icon name="Play" size={24} className="text-primary" />
+                <a
+                  key={i}
+                  href={video.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card-pastel p-5 flex items-center gap-4 hover:shadow-md transition-all group"
+                >
+                  <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl">▶️</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-foreground">{video.title}</h3>
-                    <p className="text-sm text-muted-foreground">{video.duration}</p>
+                    <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {video.title}
+                    </h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-xs bg-red-100 text-red-600 font-semibold px-2 py-0.5 rounded-full">YouTube</span>
+                      <span className="text-xs text-muted-foreground">{video.duration}</span>
+                    </div>
                   </div>
-                  <a
-                    href={video.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:text-primary/70 transition-colors"
-                  >
-                    <Icon name="ExternalLink" size={18} />
-                  </a>
-                </div>
+                  <Icon name="ExternalLink" size={18} className="text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0" />
+                </a>
               ))}
             </div>
           </div>
