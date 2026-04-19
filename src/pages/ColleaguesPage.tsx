@@ -136,28 +136,38 @@ export default function ColleaguesPage() {
           {/* === EXPERIENCE === */}
           {activeTab === "experience" && (
             <div className="animate-fade-in">
-              <h1 className="font-caveat font-bold text-4xl md:text-5xl text-center mb-10 leading-tight" style={{ color: "#2d7d2d" }}>
-                Обобщение педагогического опыта
+              <h1 className="font-caveat font-bold text-4xl md:text-5xl text-center mb-10 leading-tight" style={{ color: "#d97706" }}>
+                Обобщение педагогического опыта по теме проекта «Семейный альбом»
               </h1>
-              <div className="grid md:grid-cols-2 gap-6">
+
+              {/* Блоки: фото слева + текст справа / текст слева + фото справа */}
+              <div className="space-y-10">
                 {experience.map((item, i) => (
-                  <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition-all">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                        style={{ background: "#f0fdf4" }}
-                      >
-                        <Icon name={item.icon} size={20} className="text-green-600" fallback="Circle" />
-                      </div>
-                      <h3 className="font-bold text-gray-800">{item.title}</h3>
+                  <div
+                    key={i}
+                    className={`grid md:grid-cols-2 gap-8 items-center ${i % 2 === 1 ? "md:[direction:rtl]" : ""}`}
+                  >
+                    <div className={i % 2 === 1 ? "md:[direction:ltr]" : ""}>
+                      <img
+                        src={
+                          i % 2 === 0
+                            ? "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/514e4ef7-9f19-4094-b5d9-78972199d21e.jpg"
+                            : "https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/27ffda4a-11e7-4be4-8ca9-26d303ccdf7e.jpg"
+                        }
+                        alt={item.title}
+                        className="w-full rounded-2xl shadow-md object-cover"
+                        style={{ aspectRatio: "4/3", maxHeight: 280 }}
+                      />
                     </div>
-                    <p className="text-sm text-gray-600 leading-relaxed">{item.text}</p>
+                    <div className={i % 2 === 1 ? "md:[direction:ltr]" : ""}>
+                      <p className="text-gray-700 text-base leading-relaxed">{item.text}</p>
+                    </div>
                   </div>
                 ))}
               </div>
 
               {/* Контакт */}
-              <div className="mt-10 text-center">
+              <div className="mt-12 text-center">
                 <p className="text-gray-600 mb-4">Для обмена педагогическим опытом свяжитесь с нами:</p>
                 <a
                   href="tel:+79991234567"

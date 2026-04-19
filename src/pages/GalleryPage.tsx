@@ -143,35 +143,40 @@ export default function GalleryPage() {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-10">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
-            <Icon name="Image" size={16} />
-            <span>Галерея</span>
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            Наши творческие работы
-          </h1>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Рисунки детей и страницы нашего семейного альбома
-          </p>
-        </div>
+      <div
+        className="min-h-screen"
+        style={{
+          backgroundImage: `
+            radial-gradient(ellipse 55px 85px at 2% 30%, rgba(255,130,130,0.28) 0%, transparent 70%),
+            radial-gradient(ellipse 45px 70px at 3% 65%, rgba(255,170,80,0.28) 0%, transparent 70%),
+            radial-gradient(ellipse 40px 60px at 97% 25%, rgba(100,190,100,0.2) 0%, transparent 70%),
+            radial-gradient(ellipse 50px 75px at 98% 65%, rgba(100,190,100,0.16) 0%, transparent 70%)
+          `,
+        }}
+      >
+      <div className="max-w-5xl mx-auto px-4 py-10">
+        {/* ФЗ-152 — крупный красный текст как на референсе */}
+        <p
+          className="font-bold text-center text-xl md:text-2xl leading-snug mb-10"
+          style={{ color: "#cc0000" }}
+        >
+          Все фото и видео материалы размещены на сайте ДОУ с согласия родителей (законных представителей, лиц их заменяющих), на основании ФЗ №152 и Декларации прав ребёнка
+        </p>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-6 bg-muted/50 p-1.5 rounded-2xl max-w-sm mx-auto">
+        <div className="flex gap-2 mb-8 max-w-sm">
           <button
             onClick={() => setActiveTab("drawings")}
-            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-              activeTab === "drawings" ? "bg-white shadow text-primary" : "text-muted-foreground hover:text-foreground"
+            className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all ${
+              activeTab === "drawings" ? "bg-yellow-400 border-yellow-400 text-gray-900" : "bg-white border-gray-300 text-gray-700 hover:bg-yellow-50"
             }`}
           >
             🎨 Рисунки
           </button>
           <button
             onClick={() => setActiveTab("album")}
-            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-              activeTab === "album" ? "bg-white shadow text-primary" : "text-muted-foreground hover:text-foreground"
+            className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all ${
+              activeTab === "album" ? "bg-yellow-400 border-yellow-400 text-gray-900" : "bg-white border-gray-300 text-gray-700 hover:bg-yellow-50"
             }`}
           >
             📖 Альбом
@@ -286,15 +291,7 @@ export default function GalleryPage() {
           </div>
         )}
 
-        {/* Privacy notice */}
-        <div className="mt-10 card-pastel p-4 flex items-start gap-3 border-l-4 border-primary">
-          <Icon name="Shield" size={20} className="text-primary flex-shrink-0 mt-0.5" />
-          <p className="text-sm text-muted-foreground">
-            <span className="font-semibold text-foreground">Согласие на публикацию:</span>{" "}
-            Фото размещены с согласия родителей (законных представителей) на основании
-            Федерального закона №152-ФЗ «О персональных данных».
-          </p>
-        </div>
+      </div>
       </div>
 
       {/* Lightbox */}

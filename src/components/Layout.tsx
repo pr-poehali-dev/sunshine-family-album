@@ -16,11 +16,15 @@ const colleaguesSub = [
   { path: "/colleagues?tab=experience", label: "Обобщение педагогического опыта" },
 ];
 
+const gallerySub = [
+  { path: "/gallery", label: "Фото и видео" },
+];
+
 const navItems = [
   { path: "/", label: "ГЛАВНАЯ" },
   { path: "/parents", label: "РОДИТЕЛЯМ", sub: parentsSub },
   { path: "/colleagues", label: "КОЛЛЕГАМ ДОУ", sub: colleaguesSub },
-  { path: "/gallery", label: "ГАЛЕРЕЯ" },
+  { path: "/gallery", label: "ГАЛЕРЕЯ", sub: gallerySub },
   { path: "/achievements", label: "НАШИ ДОСТИЖЕНИЯ" },
 ];
 

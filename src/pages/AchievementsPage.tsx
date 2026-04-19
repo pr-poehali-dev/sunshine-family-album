@@ -53,19 +53,35 @@ const presentation = [
 export default function AchievementsPage() {
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-10">
-        {/* Header */}
+      <div
+        className="min-h-screen"
+        style={{
+          backgroundImage: `
+            radial-gradient(ellipse 55px 85px at 2% 30%, rgba(255,130,130,0.28) 0%, transparent 70%),
+            radial-gradient(ellipse 45px 70px at 3% 65%, rgba(255,170,80,0.28) 0%, transparent 70%),
+            radial-gradient(ellipse 40px 60px at 97% 25%, rgba(100,190,100,0.2) 0%, transparent 70%),
+            radial-gradient(ellipse 50px 75px at 98% 65%, rgba(100,190,100,0.16) 0%, transparent 70%)
+          `,
+        }}
+      >
+      <div className="max-w-5xl mx-auto px-4 py-10">
+        {/* Заголовок — фиолетовый как на референсе */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
-            <Icon name="Star" size={16} />
-            <span>Достижения</span>
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            Наши достижения
+          <h1
+            className="font-caveat font-bold text-4xl md:text-5xl leading-tight mb-6"
+            style={{ color: "#7c3aed" }}
+          >
+            Итоговые результаты проектной деятельности «Семейный альбом»
           </h1>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Итоги и результаты проекта «Семейный альбом»
-          </p>
+          {/* Фото по центру */}
+          <div className="flex justify-center mb-4">
+            <img
+              src="https://cdn.poehali.dev/projects/c1666bf3-3a06-4060-894f-5feebb6ed718/files/81bb40fb-7b82-4720-ad3d-d8785576b69a.jpg"
+              alt="Итоги проекта"
+              className="rounded-2xl shadow-lg object-cover"
+              style={{ maxWidth: 480, width: "100%", aspectRatio: "4/3" }}
+            />
+          </div>
         </div>
 
         {/* Stats */}
@@ -156,6 +172,7 @@ export default function AchievementsPage() {
             <span>☀️</span><span>💜</span><span>📖</span><span>💙</span><span>⭐</span>
           </div>
         </div>
+      </div>
       </div>
     </Layout>
   );
