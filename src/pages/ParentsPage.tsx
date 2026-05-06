@@ -125,7 +125,7 @@ const finalStage = {
   ],
 };
 
-const PRESENTATION_URL = "/files/Семейный_альбом_презентация.pptx";
+const PRESENTATION_URL = "https://disk.yandex.ru/d/wwlwv0YsEvaaqw";
 
 const articleLinks = [
   {
@@ -323,7 +323,8 @@ export default function ParentsPage() {
                   </p>
                   <a
                     href={PRESENTATION_URL}
-                    download="Семейный_альбом_презентация.pptx"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 px-6 py-3 rounded-full font-bold text-gray-900 transition-all hover:scale-105 hover:shadow-md w-fit"
                     style={{ background: "#f5c518" }}
                   >
