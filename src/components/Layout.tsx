@@ -103,7 +103,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           {/* Mobile nav */}
           <div className="md:hidden flex items-center justify-between px-4 py-3">
-            <span className="font-caveat text-xl text-green-700 font-bold">Tilda Family Album ☀️</span>
+            <span className="font-caveat text-xl text-green-700 font-bold">Группа «Солнышко» ☀️</span>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="p-2 rounded-xl hover:bg-gray-100 transition-colors"
@@ -148,7 +148,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Footer */}
       <footer className="bg-gray-50 border-t border-gray-200 mt-12">
         <div className="max-w-5xl mx-auto px-4 py-6 text-center">
-          <p className="font-caveat text-2xl text-green-700 mb-1">Tilda Family Album ☀️</p>
+          <p className="font-caveat text-2xl text-green-700 mb-1">Группа «Солнышко» ☀️</p>
           <p className="text-sm text-gray-500">Проект Tilda Family Album • 2024</p>
           <p className="text-xs text-gray-400 mt-1">
             Некоммерческий образовательный проект детского сада
